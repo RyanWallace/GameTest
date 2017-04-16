@@ -1,0 +1,110 @@
+playerData.png
+size: 64, 128
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+still
+  rotate: false
+  xy: 1, 45
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 0
+still
+  rotate: false
+  xy: 21, 45
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 1
+still
+  rotate: false
+  xy: 41, 45
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 2
+left
+  rotate: false
+  xy: 1, 23
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 3
+left
+  rotate: false
+  xy: 1, 1
+  size: 19, 20
+  orig: 20, 20
+  offset: 0, 0
+  index: 4
+left
+  rotate: false
+  xy: 41, 88
+  size: 18, 19
+  orig: 20, 20
+  offset: 1, 1
+  index: 5
+right
+  rotate: false
+  xy: 21, 23
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 6
+right
+  rotate: false
+  xy: 41, 23
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 7
+right
+  rotate: false
+  xy: 21, 89
+  size: 18, 19
+  orig: 20, 20
+  offset: 1, 1
+  index: 8
+up
+  rotate: false
+  xy: 1, 67
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 9
+up
+  rotate: false
+  xy: 1, 89
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 10
+up
+  rotate: false
+  xy: 21, 67
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 11
+down
+  rotate: false
+  xy: 41, 67
+  size: 18, 19
+  orig: 20, 20
+  offset: 1, 1
+  index: 12
+down
+  rotate: false
+  xy: 22, 1
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 13
+down
+  rotate: false
+  xy: 42, 1
+  size: 18, 20
+  orig: 20, 20
+  offset: 1, 0
+  index: 14
