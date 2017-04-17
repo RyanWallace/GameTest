@@ -222,7 +222,7 @@ public class newPlayer extends Sprite implements InputProcessor{
                         setX(newXPositionRight);
                     }
                 	
-                    break;
+                    break; 
             }
 
     		} else {
