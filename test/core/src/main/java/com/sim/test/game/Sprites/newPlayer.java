@@ -19,7 +19,7 @@ public class newPlayer extends Sprite implements InputProcessor{
 	private static final char KEY_UP_BREAK_CHAR = ' ';
 	private static final float ANIMATION_DELTA = 0.005f;
 	private static final float PLAYER_POSITION_DELTA = 0.01f;
-	private static final float PLAYER_SPEED = 200f;
+	private static final float PLAYER_SPEED = 100f;
 
 	private static Vector2 velocity = new Vector2();
     private static TextureAtlas playerAtlas;
@@ -54,7 +54,6 @@ public class newPlayer extends Sprite implements InputProcessor{
 
     @Override
     public boolean keyUp(int keycode) {
-        System.out.println("Key up");
         keyPresses.add(KEY_UP_BREAK_CHAR);
         return true;
     }
@@ -119,7 +118,22 @@ public class newPlayer extends Sprite implements InputProcessor{
                 keyTyped = true;
                 break;
         }
-//        setPlayerPosition(Gdx.graphics.getDeltaTime());
+        String keyPressesToString ="";
+        String keyPressesToString2 ="";
+        for (int i = 0; i < keyPresses.size(); i++) {
+
+        	keyPressesToString2+="| "+ i + " ";			        		
+        	if (i>=10) {
+        		keyPressesToString+="| "+ keyPresses.get(i) + "  ";			
+        	} else {
+        		keyPressesToString+="| "+ keyPresses.get(i) + " ";			
+        	}
+		}
+	        
+        keyPressesToString+="|";
+        keyPressesToString2+="|";
+        System.out.println(keyPressesToString2);
+        System.out.println(keyPressesToString);
         return keyTyped;
     }
 
@@ -128,7 +142,6 @@ public class newPlayer extends Sprite implements InputProcessor{
     public void draw(Batch batch) {
 
     	updateAnimation();
-    	//TODO scehdule a for here or soemewhere to then only execute main loop 4 times incrementing by 2 for the 16 pixels
     	updatePlayerPosition();
         super.draw(batch);
 
@@ -137,7 +150,6 @@ public class newPlayer extends Sprite implements InputProcessor{
 	private void updateAnimation() {
 		animationTime += ANIMATION_DELTA;
         
-//        System.err.println("animationTime: " + animationTime);
         setRegion(velocity.x < 0 ? left.getKeyFrame(animationTime) : velocity.x > 0 ? right.getKeyFrame(animationTime)
                 : velocity.y<0 ? down.getKeyFrame(animationTime) : velocity.y > 0 ? up.getKeyFrame(animationTime)
                 : still.getKeyFrame(animationTime));
@@ -152,51 +164,83 @@ public class newPlayer extends Sprite implements InputProcessor{
     private void updatePlayerPosition() {
     	if (!keyPresses.isEmpty()) {
     		if(KEY_UP_BREAK_CHAR != keyPresses.get(0)) {
-    			/**
-        		 * Set X movement
-        		 */
-        		float incrementX = velocity.x * PLAYER_POSITION_DELTA;
-                if (incrementX != 0.0f) {
-                	System.err.println("step incrementX: " + incrementX );        	
-                }
+    			
+    			char currentKeyPress = keyPresses.get(0);
+    			
+    			switch (currentKeyPress) {
+    			case 'w' :
 
-                float newXPosition = getX() + incrementX;
-                if (newXPosition > 14 && newXPosition < Redtown.getMapBounds().x) {
-                    setX(newXPosition);
-                }
+                    float incrementYUp = PLAYER_SPEED * PLAYER_POSITION_DELTA;
+                    if (incrementYUp != 0.0f) {
+                    	System.err.println("step incrementY: " + incrementYUp );        	
+                    }
+                    
+                    float newYPositionUp = getY() + incrementYUp;
 
-                
-                /**
-                 * Set Y movement
-                 */
-                float incrementY = velocity.y * PLAYER_POSITION_DELTA;
-                if (incrementY != 0.0f) {
-                	System.err.println("step incrementY: " + incrementY );        	
-                }
-                
-                float newYPosition = getY() + incrementY;
+                    if (newYPositionUp > 14 && newYPositionUp < Redtown.getMapBounds().y) {
+                        setY(newYPositionUp);
+                    }
+    				
+                    break;
 
-                if (newYPosition > 14 && newYPosition < Redtown.getMapBounds().y) {
-                    setY(newYPosition);
-                }
+                case 'a' :
+                	
+            		float incrementXLeft = -PLAYER_SPEED * PLAYER_POSITION_DELTA;
+                    if (incrementXLeft != 0.0f) {
+                    	System.err.println("step incrementX: " + incrementXLeft );        	
+                    }
+
+                    float newXPositionLeft = getX() + incrementXLeft;
+                    if (newXPositionLeft > 14 && newXPositionLeft < Redtown.getMapBounds().x) {
+                        setX(newXPositionLeft);
+                    }
+                    break;
+
+                case 's' :
+                    float incrementYDown = -PLAYER_SPEED * PLAYER_POSITION_DELTA;
+                    if (incrementYDown != 0.0f) {
+                    	System.err.println("step incrementY: " + incrementYDown );        	
+                    }
+                    
+                    float newYDownPosition = getY() + incrementYDown;
+
+                    if (newYDownPosition > 14 && newYDownPosition < Redtown.getMapBounds().y) {
+                        setY(newYDownPosition);
+                    }
+                	
+                    break;
+
+                case 'd' :
+                	
+            		float incrementXRight = PLAYER_SPEED * PLAYER_POSITION_DELTA;
+                    if (incrementXRight != 0.0f) {
+                    	System.err.println("step incrementX: " + incrementXRight );        	
+                    }
+
+                    float newXPositionRight = getX() + incrementXRight;
+                    if (newXPositionRight > 14 && newXPositionRight < Redtown.getMapBounds().x) {
+                        setX(newXPositionRight);
+                    }
+                	
+                    break;
+            }
+
     		} else {
     			resetVelocity();
     		}
-    		
+
     		keyPresses.remove(keyPresses.get(0));
     	}
     }
 
     private void setPlayerVelocity(float x, float y) {
-    	if(keyPresses.size() < 8) {
-    		for(int i=0; i<8; i++) {
+    	if(keyPresses.size() < 16) {
+    		for(int i=0; i<16; i++) {
     			keyPresses.add(keyPressed);
     		}    		
     	}
     	
     	System.out.println("Velocity is set");
-    	System.out.println("Keypresses contains " + keyPresses.size());
-    	
     	
         velocity.x = x;
         velocity.y = y;
